@@ -134,23 +134,6 @@ docker run -p 127.0.0.1:80:1337 --link memcached_yopass:memcached -d headit/yopa
 
 Afterwards point your reverse proxy that handles the TLS connections to `127.0.0.1:80`.
 
-### AWS Lambda
-
-_Yopass website is a separate component in this step which can be deployed to [netlify](https://netlify.com)_ for free.
-
-You can run Yopass on AWS Lambda backed by dynamodb
-
-```console
-cd deploy/aws-lambda && ./deploy.sh
-```
-
-### Kubernetes
-
-```console
-kubectl apply -f deploy/yopass-k8.yaml
-kubectl port-forward service/yopass 1337:1337
-```
-
 _This is meant to get you started, please configure TLS when running yopass for real._
 
 ## Monitoring
