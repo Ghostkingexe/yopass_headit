@@ -13,6 +13,8 @@ import { useForm } from 'react-hook-form';
 import { Grid, Typography } from '@mui/material';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { MAX_FILE_LENGTH } from '../src/api/consts';
+import theme from '../src/theme';
+import { ThemeProvider } from '@mui/material/styles';
 
 export async function getStaticProps({ locale }) {
   return {
@@ -105,6 +107,7 @@ const Upload = () => {
     );
   }
   return (
+    <ThemeProvider theme={theme}>
     <Grid>
       {isFileTooLarge && <Error message={t('upload.fileTooLarge')} />}
       <Error message={error} onClick={() => setError('')} />
@@ -128,6 +131,7 @@ const Upload = () => {
           </Grid>
         </div>
 
+
         <Grid container justifyContent="center" mt="15px">
           <Expiration control={control} />
         </Grid>
@@ -142,6 +146,7 @@ const Upload = () => {
         </Grid>
       </form>
     </Grid>
+    </ThemeProvider>
   );
 };
 
