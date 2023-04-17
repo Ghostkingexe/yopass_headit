@@ -132,6 +132,28 @@ docker run --name memcached_yopass -d memcached
 docker run -p 127.0.0.1:80:1337 --link memcached_yopass:memcached -d headit/yopass_custom:v3.7.1 --memcached=memcached:11211
 ```
 
+Without TLS encryption use the folowing Compose:
+
+```console
+version: "3.0"
+
+services:
+  memcached:
+    image: memcached
+    restart: always
+    expose:
+      - "11211"
+
+  yopass:
+    image: headit/yopass_custom:v3.7.1
+    restart: always
+    depends_on:
+      - memcached
+    ports:
+      - "0.0.0.0:6010:80"
+    command: "--memcached=memcached:11211 --port 80"
+```
+
 Afterwards point your reverse proxy that handles the TLS connections to `127.0.0.1:80`.
 
 _This is meant to get you started, please configure TLS when running yopass for real._
